@@ -121,6 +121,9 @@ function SearchCtrl($scope, $http, $routeParams, $log, $sce, $location) {
                 }
                 for(var fv in hit.fields) {
                     fieldval = hit.fields[fv];
+                    if(fv == 'url'){
+                        hit.fragments[fv] = [$sce.trustAsHtml("<a target='_blank' href=\""+fieldval+"\">"+fieldval+"</a>")];
+                    }
                     if (hit.fragments[fv] === undefined) {
                         hit.fragments[fv] = [$sce.trustAsHtml(""+fieldval)];
                     }
